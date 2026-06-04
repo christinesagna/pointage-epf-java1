@@ -4,23 +4,29 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <!-- Connexion MySQL -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pointage_epf?useSSL=false&amp;serverTimezone=Africa/Dakar&amp;allowPublicKeyRetrieval=true</property>
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost:3306/pointage_epf?useSSL=false&amp;serverTimezone=Africa/Dakar
+        </property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
 
-        <!-- Dialecte MySQL -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-
-        <!-- Création automatique des tables -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
-
-        <!-- Afficher les requêtes SQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <!-- Entités (à compléter) -->
+        <property name="current_session_context_class">thread</property>
 
+        <mapping class="sn.epf.pointage.model.Utilisateur"/>
+        <mapping class="sn.epf.pointage.model.Professeur"/>
+        <mapping class="sn.epf.pointage.model.Cours"/>
+        <mapping class="sn.epf.pointage.model.Salle"/>
+        <mapping class="sn.epf.pointage.model.Assignation"/>
+        <mapping class="sn.epf.pointage.model.SeancePlanifiee"/>
+        <mapping class="sn.epf.pointage.model.Pointage"/>
+        <mapping class="sn.epf.pointage.model.PeriodiciteCours"/>
+        <mapping class="sn.epf.pointage.model.RapportMensuel"/>
+        <mapping class="sn.epf.pointage.model.AuditConnexion"/>
     </session-factory>
 </hibernate-configuration>
