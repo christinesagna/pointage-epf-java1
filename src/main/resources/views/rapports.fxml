@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.epf.pointage.ui.controller.RapportsController" spacing="16" styleClass="page-root">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Rapports mensuels" styleClass="page-title"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="professeurBox" prefWidth="280"/>
+        <Spinner fx:id="moisSpinner" prefWidth="90"/>
+        <Spinner fx:id="anneeSpinner" prefWidth="110"/>
+        <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
+        <Button text="Générer" onAction="#genererRapport" styleClass="primary-button"/>
+        <Button text="Valider" onAction="#validerRapport" styleClass="secondary-button"/>
+        <Button text="Exporter PDF" onAction="#exporterPdf" styleClass="secondary-button"/>
+    </HBox>
+    <TableView fx:id="rapportTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="moisColumn" text="Mois" prefWidth="90"/>
+            <TableColumn fx:id="anneeColumn" text="Année" prefWidth="90"/>
+            <TableColumn fx:id="professeurColumn" text="Professeur" prefWidth="220"/>
+            <TableColumn fx:id="heuresColumn" text="Heures" prefWidth="120"/>
+            <TableColumn fx:id="montantColumn" text="Montant XOF" prefWidth="150"/>
+            <TableColumn fx:id="statutColumn" text="Statut" prefWidth="140"/>
+        </columns>
+    </TableView>
+</VBox>

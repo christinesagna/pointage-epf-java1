@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.epf.pointage.ui.controller.ProfesseursController" spacing="16" styleClass="page-root">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Gestion des professeurs" styleClass="page-title"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Recherche par matricule, nom, email" HBox.hgrow="ALWAYS" maxWidth="320"/>
+        <Button text="Filtrer" onAction="#search" styleClass="secondary-button"/>
+        <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
+        <Button text="Nouveau professeur" onAction="#openCreateForm" styleClass="primary-button"/>
+        <Button text="Désactiver" onAction="#deactivateSelected" styleClass="danger-outline-button"/>
+    </HBox>
+    <TableView fx:id="professeurTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="matriculeColumn" text="Matricule" prefWidth="140"/>
+            <TableColumn fx:id="nomColumn" text="Nom" prefWidth="120"/>
+            <TableColumn fx:id="prenomColumn" text="Prénom" prefWidth="120"/>
+            <TableColumn fx:id="emailColumn" text="Email" prefWidth="220"/>
+            <TableColumn fx:id="telephoneColumn" text="Téléphone" prefWidth="120"/>
+            <TableColumn fx:id="contratColumn" text="Contrat" prefWidth="120"/>
+            <TableColumn fx:id="actifColumn" text="Actif" prefWidth="90"/>
+        </columns>
+    </TableView>
+</VBox>

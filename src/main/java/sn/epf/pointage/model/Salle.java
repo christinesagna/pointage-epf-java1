@@ -26,4 +26,9 @@ public class Salle {
     public void setBatiment(String batiment) { this.batiment = batiment; }
     public String getEquipements() { return equipements; }
     public void setEquipements(String equipements) { this.equipements = equipements; }
+
+    @Override
+    public String toString() {
+        return nom + " (" + batiment + ")";
+    }
 }

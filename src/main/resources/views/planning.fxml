@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sn.epf.pointage.ui.controller.PlanningController"
+      spacing="16" styleClass="page-root">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Planning" styleClass="page-title"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="professeurBox" prefWidth="260"/>
+        <Spinner fx:id="moisSpinner" prefWidth="90"/>
+        <Spinner fx:id="anneeSpinner" prefWidth="110"/>
+        <Button text="Charger" onAction="#refresh" styleClass="secondary-button"/>
+        <Button fx:id="btnNouvelleSeance" text="+ Nouvelle Séance" onAction="#ouvrirFormulaireSeance" styleClass="primary-button"/>
+    </HBox>
+    <TableView fx:id="planningTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="180"/>
+            <TableColumn fx:id="coursColumn" text="Cours" prefWidth="260"/>
+            <TableColumn fx:id="salleColumn" text="Salle" prefWidth="150"/>
+            <TableColumn fx:id="dureeColumn" text="Durée (min)" prefWidth="120"/>
+            <TableColumn fx:id="statutColumn" text="Statut" prefWidth="140"/>
+        </columns>
+    </TableView>
+</VBox>

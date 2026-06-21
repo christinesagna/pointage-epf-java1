@@ -36,4 +36,9 @@ public class Cours {
     public void setFiliere(String filiere) { this.filiere = filiere; }
     public String getSemestre() { return semestre; }
     public void setSemestre(String semestre) { this.semestre = semestre; }
+
+    @Override
+    public String toString() {
+        return code + " - " + intitule;
+    }
 }
