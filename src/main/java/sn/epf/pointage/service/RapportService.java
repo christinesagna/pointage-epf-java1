@@ -11,6 +11,7 @@ import sn.epf.pointage.model.enums.StatutSeance;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Optional;
 
 public class RapportService {
 
@@ -46,6 +47,18 @@ public class RapportService {
         rapport.setStatut(StatutRapport.EN_ATTENTE);
 
         return rapportDAO.save(rapport);
+    }
+
+    public List<RapportMensuel> listerRapportsParProfesseur(Long professeurId) {
+        return rapportDAO.findByProfesseur(professeurId);
+    }
+
+    public List<RapportMensuel> listerRapportsDuMois(int mois, int annee) {
+        return rapportDAO.findByMoisAnnee(mois, annee);
+    }
+
+    public Optional<RapportMensuel> findRapport(Long professeurId, int mois, int annee) {
+        return rapportDAO.findByProfesseurAndMoisAnnee(professeurId, mois, annee);
     }
 
     public RapportMensuel validerRapport(RapportMensuel rapport) {

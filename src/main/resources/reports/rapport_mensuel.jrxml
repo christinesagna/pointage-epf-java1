@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="rapport_mensuel" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+    <parameter name="professeur" class="java.lang.String"/>
+    <parameter name="matricule" class="java.lang.String"/>
+    <parameter name="mois" class="java.lang.Integer"/>
+    <parameter name="annee" class="java.lang.Integer"/>
+    <parameter name="heures" class="java.lang.String"/>
+    <parameter name="montant" class="java.lang.String"/>
+    <parameter name="statut" class="java.lang.String"/>
+
+    <title>
+        <band height="90">
+            <staticText>
+                <reportElement x="0" y="0" width="400" height="30"/>
+                <textElement><font size="20" isBold="true"/></textElement>
+                <text><![CDATA[EPF Africa - Rapport mensuel]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="40" width="520" height="20"/>
+                <textElement><font size="11"/></textElement>
+                <text><![CDATA[Système de Gestion de Pointage des Professeurs]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <detail>
+        <band height="180">
+            <staticText><reportElement x="0" y="10" width="130" height="20"/><text><![CDATA[Professeur]]></text></staticText>
+            <textField><reportElement x="150" y="10" width="300" height="20"/><textFieldExpression><![CDATA[$P{professeur}]]></textFieldExpression></textField>
+            <staticText><reportElement x="0" y="40" width="130" height="20"/><text><![CDATA[Matricule]]></text></staticText>
+            <textField><reportElement x="150" y="40" width="300" height="20"/><textFieldExpression><![CDATA[$P{matricule}]]></textFieldExpression></textField>
+            <staticText><reportElement x="0" y="70" width="130" height="20"/><text><![CDATA[Période]]></text></staticText>
+            <textField><reportElement x="150" y="70" width="300" height="20"/><textFieldExpression><![CDATA[$P{mois} + "/" + $P{annee}]]></textFieldExpression></textField>
+            <staticText><reportElement x="0" y="100" width="130" height="20"/><text><![CDATA[Heures réalisées]]></text></staticText>
+            <textField><reportElement x="150" y="100" width="300" height="20"/><textFieldExpression><![CDATA[$P{heures}]]></textFieldExpression></textField>
+            <staticText><reportElement x="0" y="130" width="130" height="20"/><text><![CDATA[Montant XOF]]></text></staticText>
+            <textField><reportElement x="150" y="130" width="300" height="20"/><textFieldExpression><![CDATA[$P{montant}]]></textFieldExpression></textField>
+            <staticText><reportElement x="0" y="160" width="130" height="20"/><text><![CDATA[Statut]]></text></staticText>
+            <textField><reportElement x="150" y="160" width="300" height="20"/><textFieldExpression><![CDATA[$P{statut}]]></textFieldExpression></textField>
+        </band>
+    </detail>
+</jasperReport>

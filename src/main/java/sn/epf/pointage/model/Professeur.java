@@ -69,4 +69,13 @@ public class Professeur {
     public void setActif(boolean actif) { this.actif = actif; }
     public List<Assignation> getAssignations() { return assignations; }
     public void setAssignations(List<Assignation> assignations) { this.assignations = assignations; }
+
+    public String getNomComplet() {
+        return (prenom == null ? "" : prenom) + " " + (nom == null ? "" : nom);
+    }
+
+    @Override
+    public String toString() {
+        return getNomComplet().trim() + (matricule != null ? " (" + matricule + ")" : "");
+    }
 }

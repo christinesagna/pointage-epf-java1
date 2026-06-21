@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.epf.pointage.ui.controller.ProfesseurFormController" styleClass="page-root">
+    <center>
+        <GridPane hgap="12" vgap="12" styleClass="card">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="35"/>
+                <ColumnConstraints percentWidth="65"/>
+            </columnConstraints>
+            <Label text="Nom" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="nomField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label text="Prénom" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="prenomField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Email" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="emailField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            <Label text="Téléphone" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="telephoneField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            <Label text="Type contrat" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="contratBox" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+            <Label text="Taux horaire XOF" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="tauxField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            <Label text="Date embauche" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="dateEmbauchePicker" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+            <Label text="Photo" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <HBox spacing="8" GridPane.rowIndex="7" GridPane.columnIndex="1"><TextField fx:id="photoField" HBox.hgrow="ALWAYS"/><Button text="Parcourir" onAction="#browsePhoto" styleClass="secondary-button"/></HBox>
+            <Label text="Login" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+            <TextField fx:id="loginField" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+            <Label text="Mot de passe" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+            <PasswordField fx:id="passwordField" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+        </GridPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10" styleClass="toolbar-row">
+            <padding><Insets top="10" right="20" bottom="20" left="20"/></padding>
+            <Button text="Annuler" onAction="#cancel" styleClass="secondary-button"/>
+            <Button text="Enregistrer" onAction="#save" styleClass="primary-button"/>
+        </HBox>
+    </bottom>
+</BorderPane>

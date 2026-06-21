@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="sn.epf.pointage.ui.controller.LoginController"
+           styleClass="login-root">
+
+    <!-- Cercles décoratifs -->
+    <Circle radius="200" fill="#2E75B6" opacity="0.08" translateX="-180" translateY="-150"/>
+    <Circle radius="150" fill="#1A2744" opacity="0.06" translateX="200" translateY="180"/>
+
+    <HBox alignment="CENTER">
+        <VBox maxWidth="440" spacing="0" styleClass="login-card">
+
+            <!-- Header bleu -->
+            <VBox styleClass="login-header" spacing="8">
+                <padding><Insets top="32" right="32" bottom="28" left="32"/></padding>
+                <Label text="EPF AFRICA" styleClass="login-logo"/>
+                <Label text="Système de Gestion de Pointage" styleClass="login-header-subtitle"/>
+                <Label text="des Professeurs" styleClass="login-header-subtitle"/>
+            </VBox>
+
+            <!-- Formulaire blanc -->
+            <VBox spacing="16" styleClass="login-form">
+                <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+                <Label text="Connexion" styleClass="login-title"/>
+                <Label text="Entrez vos identifiants pour accéder au système"
+                       styleClass="login-subtitle" wrapText="true"/>
+
+                <VBox spacing="6">
+                    <Label text="Identifiant" styleClass="field-label"/>
+                    <TextField fx:id="loginField" promptText="Votre login"
+                               styleClass="login-field"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Mot de passe" styleClass="field-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Votre mot de passe"
+                                   styleClass="login-field"/>
+                </VBox>
+
+                <Button text="SE CONNECTER" onAction="#onLogin"
+                        styleClass="login-button" maxWidth="Infinity"/>
+
+                <Label fx:id="feedbackLabel" styleClass="login-error" wrapText="true"/>
+
+                <Label text="EPF Africa © 2026 — Tous droits réservés"
+                       styleClass="login-footer" alignment="CENTER" maxWidth="Infinity"/>
+            </VBox>
+
+        </VBox>
+    </HBox>
+</StackPane>

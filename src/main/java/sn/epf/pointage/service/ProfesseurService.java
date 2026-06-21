@@ -31,6 +31,10 @@ public class ProfesseurService {
         return saved;
     }
 
+    public List<Professeur> listerTousProfesseurs() {
+        return professeurDAO.findAll();
+    }
+
     public List<Professeur> listerProfesseursActifs() {
         return professeurDAO.findActifs();
     }
@@ -38,6 +42,5 @@ public class ProfesseurService {
     public void desactiverProfesseur(Professeur professeur) {
         professeur.setActif(false);
         professeurDAO.update(professeur);
-        // bonus : annuler les séances futures ici
     }
 }
