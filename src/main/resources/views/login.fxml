@@ -8,56 +8,49 @@
            fx:controller="sn.epf.pointage.ui.controller.LoginController"
            styleClass="login-root">
 
-    <!-- Bande orange décorative en haut -->
-    <Rectangle fill="#E8530A" height="6" translateY="-357" width="10000"/>
+    <!-- Cercles décoratifs -->
+    <Circle radius="200" fill="#2E75B6" opacity="0.08" translateX="-180" translateY="-150"/>
+    <Circle radius="150" fill="#1A2744" opacity="0.06" translateX="200" translateY="180"/>
 
-    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-        <VBox maxWidth="460" spacing="0" styleClass="login-card">
+    <HBox alignment="CENTER">
+        <VBox maxWidth="440" spacing="0" styleClass="login-card">
 
-            <!-- Header blanc avec logo EPF -->
-            <VBox styleClass="login-header" spacing="4" alignment="CENTER">
-                <padding><Insets top="36" right="32" bottom="24" left="32"/></padding>
-                <HBox alignment="CENTER" spacing="12">
-                    <Rectangle fill="#E8530A" width="6" height="50" arcWidth="4" arcHeight="4"/>
-                    <VBox spacing="2">
-                        <Label text="EPF AFRICA" styleClass="login-logo"/>
-                        <Label text="Engineering School — Dakar" styleClass="login-logo-sub"/>
-                    </VBox>
-                </HBox>
-                <Separator styleClass="login-separator"/>
-                <Label text="Système de Gestion de Pointage des Professeurs"
-                       styleClass="login-header-desc" wrapText="true" alignment="CENTER"/>
+            <!-- Header bleu -->
+            <VBox styleClass="login-header" spacing="8">
+                <padding><Insets top="32" right="32" bottom="28" left="32"/></padding>
+                <Label text="EPF AFRICA" styleClass="login-logo"/>
+                <Label text="Système de Gestion de Pointage" styleClass="login-header-subtitle"/>
+                <Label text="des Professeurs" styleClass="login-header-subtitle"/>
             </VBox>
 
-            <!-- Formulaire -->
-            <VBox spacing="18" styleClass="login-form">
-                <padding><Insets top="28" right="36" bottom="36" left="36"/></padding>
+            <!-- Formulaire blanc -->
+            <VBox spacing="16" styleClass="login-form">
+                <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
 
-                <VBox spacing="4">
+                <Label text="Connexion" styleClass="login-title"/>
+                <Label text="Entrez vos identifiants pour accéder au système"
+                       styleClass="login-subtitle" wrapText="true"/>
+
+                <VBox spacing="6">
                     <Label text="Identifiant" styleClass="field-label"/>
-                    <TextField fx:id="loginField" promptText="Entrez votre login"
+                    <TextField fx:id="loginField" promptText="Votre login"
                                styleClass="login-field"/>
                 </VBox>
 
-                <VBox spacing="4">
+                <VBox spacing="6">
                     <Label text="Mot de passe" styleClass="field-label"/>
-                    <PasswordField fx:id="passwordField" promptText="Entrez votre mot de passe"
+                    <PasswordField fx:id="passwordField" promptText="Votre mot de passe"
                                    styleClass="login-field"/>
                 </VBox>
 
                 <Button text="SE CONNECTER" onAction="#onLogin"
                         styleClass="login-button" maxWidth="Infinity"/>
 
-                <Label fx:id="feedbackLabel" styleClass="login-error"
-                       wrapText="true" alignment="CENTER" maxWidth="Infinity"/>
-            </VBox>
+                <Label fx:id="feedbackLabel" styleClass="login-error" wrapText="true"/>
 
-            <!-- Footer -->
-            <HBox styleClass="login-footer-bar" alignment="CENTER">
-                <padding><Insets top="12" bottom="12"/></padding>
-                <Label text="© 2026 EPF Africa — Tous droits réservés"
-                       styleClass="login-footer-text"/>
-            </HBox>
+                <Label text="EPF Africa © 2026 — Tous droits réservés"
+                       styleClass="login-footer" alignment="CENTER" maxWidth="Infinity"/>
+            </VBox>
 
         </VBox>
     </HBox>
