@@ -43,6 +43,9 @@ public class PlanningService {
     }
 
     public List<SeancePlanifiee> listerSeancesDuMois(Long professeurId, int mois, int annee) {
+        if (professeurId == null) {
+            return seanceDAO.findByMoisAndAnnee(mois, annee);
+        }
         return seanceDAO.findByProfesseurAndMois(professeurId, mois, annee);
     }
 

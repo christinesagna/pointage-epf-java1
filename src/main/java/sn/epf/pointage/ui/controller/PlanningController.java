@@ -57,22 +57,33 @@ public class PlanningController {
             professeurBox.setDisable(true);
             btnNouvelleSeance.setVisible(false);
         } else {
-            professeurBox.setItems(FXCollections.observableArrayList(professeurService.listerProfesseursActifs()));
-            if (!professeurBox.getItems().isEmpty()) {
-                professeurBox.getSelectionModel().selectFirst();
-            }
+            List<Professeur> professeurs = professeurService.listerProfesseursActifs();
+            professeurBox.getItems().setAll(professeurs);
+            professeurBox.getItems().add(0, null);
+            professeurBox.setCellFactory(listView -> new ListCell<>() {
+                @Override
+                protected void updateItem(Professeur prof, boolean empty) {
+                    super.updateItem(prof, empty);
+                    setText(empty ? null : prof == null ? "Tout" : prof.toString());
+                }
+            });
+            professeurBox.setButtonCell(new ListCell<>() {
+                @Override
+                protected void updateItem(Professeur prof, boolean empty) {
+                    super.updateItem(prof, empty);
+                    setText(empty ? null : prof == null ? "Tout" : prof.toString());
+                }
+            });
+            professeurBox.getSelectionModel().selectFirst();
         }
     }
 
     @FXML
     public void refresh() {
         Professeur professeur = professeurBox.getValue();
-        if (professeur == null) {
-            planningTable.getItems().clear();
-            return;
-        }
+        Long professeurId = professeur != null ? professeur.getId() : null;
         List<SeancePlanifiee> seances = planningService.listerSeancesDuMois(
-                professeur.getId(), moisSpinner.getValue(), anneeSpinner.getValue()
+                professeurId, moisSpinner.getValue(), anneeSpinner.getValue()
         );
         planningTable.setItems(FXCollections.observableArrayList(seances));
     }

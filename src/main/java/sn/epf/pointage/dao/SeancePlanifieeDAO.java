@@ -62,4 +62,18 @@ public class SeancePlanifieeDAO extends AbstractGenericDAO<SeancePlanifiee, Long
                     .list();
         }
     }
+
+    public List<SeancePlanifiee> findByMoisAndAnnee(int mois, int annee) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("""
+                    select s
+                    from SeancePlanifiee s
+                    where month(s.dateHeure) = :mois
+                      and year(s.dateHeure) = :annee
+                    """, SeancePlanifiee.class)
+                    .setParameter("mois", mois)
+                    .setParameter("annee", annee)
+                    .list();
+        }
+    }
 }
