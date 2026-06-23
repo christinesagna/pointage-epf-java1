@@ -3,10 +3,10 @@ package sn.epf.pointage.ui.controller;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sn.epf.pointage.model.Professeur;
 import sn.epf.pointage.service.ProfesseurService;
@@ -67,7 +67,7 @@ public class ProfesseursController {
     public void openCreateForm() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/prof_form.fxml"));
-            BorderPane root = loader.load();
+            Parent root = loader.load();
             ProfesseurFormController controller = loader.getController();
             controller.setOnSaved(this::refresh);
             Stage stage = new Stage();
@@ -80,10 +80,33 @@ public class ProfesseursController {
     }
 
     @FXML
+    public void activateSelected() {
+        Professeur selected = professeurTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtils.warning("Sélection requise", "Sélectionnez un professeur.");
+            return;
+        }
+        if (selected.isActif()) {
+            AlertUtils.info("Information", "Ce professeur est déjà actif.");
+            return;
+        }
+        if (!AlertUtils.confirm("Confirmation", "Activer ce professeur ?")) {
+            return;
+        }
+        professeurService.activerProfesseur(selected);
+        refresh();
+        AlertUtils.info("Succès", "Professeur activé avec succès.");
+    }
+
+    @FXML
     public void deactivateSelected() {
         Professeur selected = professeurTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
             AlertUtils.warning("Sélection requise", "Sélectionnez un professeur.");
+            return;
+        }
+        if (!selected.isActif()) {
+            AlertUtils.info("Information", "Ce professeur est déjà désactivé.");
             return;
         }
         if (!AlertUtils.confirm("Confirmation", "Désactiver ce professeur ?")) {

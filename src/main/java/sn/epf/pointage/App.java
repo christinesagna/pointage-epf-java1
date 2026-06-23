@@ -2,6 +2,7 @@ package sn.epf.pointage;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import sn.epf.pointage.config.DevSeeder;
 import sn.epf.pointage.config.HibernateUtil;
 import sn.epf.pointage.ui.Router;
 
@@ -20,6 +21,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         HibernateUtil.getSessionFactory();
+        DevSeeder.seedIfNeeded();
         launch(args);
     }
 }

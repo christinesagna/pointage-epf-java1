@@ -12,6 +12,7 @@
         <Button text="Filtrer" onAction="#search" styleClass="secondary-button"/>
         <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
         <Button text="Nouveau professeur" onAction="#openCreateForm" styleClass="primary-button"/>
+        <Button text="Activer" onAction="#activateSelected" styleClass="secondary-button"/>
         <Button text="Désactiver" onAction="#deactivateSelected" styleClass="danger-outline-button"/>
     </HBox>
     <TableView fx:id="professeurTable" VBox.vgrow="ALWAYS">

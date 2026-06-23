@@ -16,6 +16,8 @@ public class MainLayoutController {
     @FXML private Label roleLabel;
     @FXML private StackPane contentPane;
     @FXML private Button professeursButton;
+    @FXML private Button coursButton;
+    @FXML private Button sallesButton;
     @FXML private Button pointageButton;
     @FXML private Button rapportsButton;
 
@@ -30,6 +32,13 @@ public class MainLayoutController {
             if (user.getRole() == Role.PROFESSEUR) {
                 professeursButton.setVisible(false);
                 professeursButton.setManaged(false);
+                coursButton.setVisible(false);
+                coursButton.setManaged(false);
+                sallesButton.setVisible(false);
+                sallesButton.setManaged(false);
+            } else if (user.getRole() == Role.SCOLARITE) {
+                pointageButton.setVisible(false);
+                pointageButton.setManaged(false);
             }
             if (user.getRole() == Role.ADMIN) {
                 pointageButton.setVisible(false);
@@ -50,6 +59,16 @@ public class MainLayoutController {
     @FXML
     public void showProfesseurs() {
         Router.setCenter("/views/professeurs.fxml");
+    }
+
+    @FXML
+    public void showCours() {
+        Router.setCenter("/views/cours.fxml");
+    }
+
+    @FXML
+    public void showSalles() {
+        Router.setCenter("/views/salles.fxml");
     }
 
     @FXML

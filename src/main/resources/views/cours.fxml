@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.epf.pointage.ui.controller.CoursController" spacing="16" styleClass="page-root">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Gestion des cours" styleClass="page-title"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Recherche par code, intitulé, filière" HBox.hgrow="ALWAYS" maxWidth="320"/>
+        <Button text="Filtrer" onAction="#search" styleClass="secondary-button"/>
+        <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
+        <Button text="Nouveau cours" onAction="#openCreateForm" styleClass="primary-button"/>
+        <Button text="Supprimer" onAction="#deleteSelected" styleClass="danger-outline-button"/>
+    </HBox>
+    <TableView fx:id="coursTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="codeColumn" text="Code" prefWidth="140"/>
+            <TableColumn fx:id="intituleColumn" text="Intitulé" prefWidth="220"/>
+            <TableColumn fx:id="volumeHoraireColumn" text="Volume horaire" prefWidth="120"/>
+            <TableColumn fx:id="niveauColumn" text="Niveau" prefWidth="120"/>
+            <TableColumn fx:id="filiereColumn" text="Filière" prefWidth="120"/>
+            <TableColumn fx:id="semestreColumn" text="Semestre" prefWidth="120"/>
+        </columns>
+    </TableView>
+</VBox>

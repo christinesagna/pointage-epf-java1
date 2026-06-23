@@ -43,4 +43,9 @@ public class ProfesseurService {
         professeur.setActif(false);
         professeurDAO.update(professeur);
     }
+
+    public void activerProfesseur(Professeur professeur) {
+        professeur.setActif(true);
+        professeurDAO.update(professeur);
+    }
 }

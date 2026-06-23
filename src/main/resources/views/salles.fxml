@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.epf.pointage.ui.controller.SallesController" spacing="16" styleClass="page-root">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Gestion des salles" styleClass="page-title"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Recherche par nom, bâtiment" HBox.hgrow="ALWAYS" maxWidth="320"/>
+        <Button text="Filtrer" onAction="#search" styleClass="secondary-button"/>
+        <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
+        <Button text="Nouvelle salle" onAction="#openCreateForm" styleClass="primary-button"/>
+        <Button text="Supprimer" onAction="#deleteSelected" styleClass="danger-outline-button"/>
+    </HBox>
+    <TableView fx:id="salleTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="nomColumn" text="Nom" prefWidth="180"/>
+            <TableColumn fx:id="capaciteColumn" text="Capacité" prefWidth="100"/>
+            <TableColumn fx:id="batimentColumn" text="Bâtiment" prefWidth="140"/>
+            <TableColumn fx:id="equipementsColumn" text="Équipements" prefWidth="220"/>
+        </columns>
+    </TableView>
+</VBox>
