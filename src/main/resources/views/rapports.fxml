@@ -12,9 +12,9 @@
         <Spinner fx:id="moisSpinner" prefWidth="90"/>
         <Spinner fx:id="anneeSpinner" prefWidth="110"/>
         <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
-        <Button text="Générer" onAction="#genererRapport" styleClass="primary-button"/>
-        <Button text="Valider" onAction="#validerRapport" styleClass="secondary-button"/>
-        <Button text="Exporter PDF" onAction="#exporterPdf" styleClass="secondary-button"/>
+        <Button fx:id="btnGenerer" text="Générer" onAction="#genererRapport" styleClass="primary-button"/>
+        <Button fx:id="btnValider" text="Valider" onAction="#validerRapport" styleClass="secondary-button"/>
+        <Button fx:id="btnExporter" text="Exporter PDF" onAction="#exporterPdf" styleClass="secondary-button"/>
     </HBox>
     <TableView fx:id="rapportTable" VBox.vgrow="ALWAYS">
         <columns>

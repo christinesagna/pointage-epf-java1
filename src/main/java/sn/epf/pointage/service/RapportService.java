@@ -1,10 +1,12 @@
 package sn.epf.pointage.service;
 
+import sn.epf.pointage.config.SecurityUtils;
 import sn.epf.pointage.dao.RapportMensuelDAO;
 import sn.epf.pointage.dao.SeancePlanifieeDAO;
 import sn.epf.pointage.model.Professeur;
 import sn.epf.pointage.model.RapportMensuel;
 import sn.epf.pointage.model.SeancePlanifiee;
+import sn.epf.pointage.model.enums.Role;
 import sn.epf.pointage.model.enums.StatutRapport;
 import sn.epf.pointage.model.enums.StatutSeance;
 
@@ -19,6 +21,18 @@ public class RapportService {
     private final RapportMensuelDAO rapportDAO = new RapportMensuelDAO();
 
     public RapportMensuel genererRapportMensuel(Professeur professeur, int mois, int annee) {
+        // Sécurité : si l'utilisateur est PROFESSEUR, il ne peut générer que son propre rapport
+        try {
+            sn.epf.pointage.model.Utilisateur current = sn.epf.pointage.config.SessionContext.getInstance().currentUser();
+            if (current != null && current.getRole() == sn.epf.pointage.model.enums.Role.PROFESSEUR) {
+                if (current.getProfesseurLie() == null || !current.getProfesseurLie().getId().equals(professeur.getId())) {
+                    throw new SecurityException("Accès refusé: génération de rapport non autorisée.");
+                }
+            }
+        } catch (SecurityException e) {
+            throw e;
+        } catch (Exception ignored) {}
+
         List<SeancePlanifiee> restantes = seanceDAO.findPlanifieesDuMois(professeur.getId(), mois, annee);
         if (!restantes.isEmpty()) {
             throw new IllegalStateException("Impossible de générer le rapport : des séances restent PLANIFIEES.");
@@ -50,6 +64,17 @@ public class RapportService {
     }
 
     public List<RapportMensuel> listerRapportsParProfesseur(Long professeurId) {
+        // Sécurité : les professeurs ne peuvent consulter que leurs propres rapports
+        try {
+            sn.epf.pointage.model.Utilisateur current = sn.epf.pointage.config.SessionContext.getInstance().currentUser();
+            if (current != null && current.getRole() == sn.epf.pointage.model.enums.Role.PROFESSEUR) {
+                if (current.getProfesseurLie() == null || !current.getProfesseurLie().getId().equals(professeurId)) {
+                    throw new SecurityException("Accès refusé: consultation non autorisée.");
+                }
+            }
+        } catch (SecurityException e) {
+            throw e;
+        } catch (Exception ignored) {}
         return rapportDAO.findByProfesseur(professeurId);
     }
 
@@ -62,6 +87,9 @@ public class RapportService {
     }
 
     public RapportMensuel validerRapport(RapportMensuel rapport) {
+        // Vérification de sécurité : seul SCOLARITE ou ADMIN peut valider
+        SecurityUtils.checkAnyRole(Role.ADMIN, Role.SCOLARITE);
+        
         rapport.setStatut(StatutRapport.VALIDE);
         return rapportDAO.update(rapport);
     }

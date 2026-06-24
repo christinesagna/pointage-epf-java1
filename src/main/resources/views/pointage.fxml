@@ -9,8 +9,10 @@
         <Label text="Pointage" styleClass="page-title"/>
         <Pane HBox.hgrow="ALWAYS"/>
         <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
+        <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
         <Button text="Pointer début" onAction="#pointerDebut" styleClass="primary-button"/>
         <Button text="Pointer fin" onAction="#pointerFin" styleClass="secondary-button"/>
+        <Button text="Voir mes retards" onAction="#voirMesRetards" styleClass="secondary-button"/>
     </HBox>
     <Label fx:id="contextLabel" styleClass="subtitle"/>
     <TableView fx:id="seancesTable" VBox.vgrow="ALWAYS">

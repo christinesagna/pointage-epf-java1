@@ -80,4 +80,32 @@ public class PointageController {
         AlertUtils.info("Résultat du pointage", pointage.getStatut().name() + (pointage.getObservations() != null ? " - " + pointage.getObservations() : ""));
         refresh();
     }
+
+    @FXML
+    public void voirMesRetards() {
+        Utilisateur user = authService.currentUser();
+        if (user == null || user.getProfesseurLie() == null) {
+            AlertUtils.warning("Accès refusé", "Aucun professeur lié à cette session.");
+            return;
+        }
+        try {
+            java.time.LocalDate fin = java.time.LocalDate.now();
+            java.time.LocalDate debut = fin.minusMonths(1);
+            java.util.List<sn.epf.pointage.model.Pointage> retards = new sn.epf.pointage.service.AbsenceRetardService()
+                    .listerRetardsProfesseur(user.getProfesseurLie().getId(), debut, fin);
+
+            StringBuilder sb = new StringBuilder();
+            for (var r : retards) {
+                sb.append(r.getHeurePointage().format(formatter))
+                        .append(" — ")
+                        .append(r.getStatut().name())
+                        .append(r.getObservations() != null ? " (" + r.getObservations() + ")" : "")
+                        .append("\n");
+            }
+            if (sb.length() == 0) sb.append("Aucun retard enregistré sur la période.");
+            AlertUtils.info("Mes retards (30 jours)", sb.toString());
+        } catch (Exception e) {
+            AlertUtils.error("Erreur", e.getMessage());
+        }
+    }
 }

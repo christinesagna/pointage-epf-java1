@@ -51,12 +51,18 @@ public class RapportsController {
         refresh();
     }
 
+    @FXML private Button btnValider;
+    @FXML private Button btnExporter;
+    @FXML private Button btnGenerer;
+
     private void setupProfesseurSelector() {
         Utilisateur user = authService.currentUser();
         if (user != null && user.getRole() == Role.PROFESSEUR && user.getProfesseurLie() != null) {
             professeurBox.getItems().setAll(user.getProfesseurLie());
             professeurBox.getSelectionModel().selectFirst();
             professeurBox.setDisable(true);
+            // Masquer le bouton Valider pour les professeurs
+            if (btnValider != null) btnValider.setVisible(false);
         } else {
             professeurBox.setItems(FXCollections.observableArrayList(professeurService.listerProfesseursActifs()));
             if (!professeurBox.getItems().isEmpty()) {

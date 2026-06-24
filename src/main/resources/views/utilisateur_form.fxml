@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.epf.pointage.ui.controller.UtilisateurFormController" spacing="16" styleClass="page-root">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <Label text="Formulaire utilisateur" styleClass="page-title"/>
+    <GridPane hgap="12" vgap="12">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
+        <RowConstraints minHeight="32"/>
+        <RowConstraints minHeight="32"/>
+        <RowConstraints minHeight="32"/>
+    </GridPane>
+    <children>
+        <Label text="Login :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="loginField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Rôle :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="roleBox" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Mot de passe :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <PasswordField fx:id="passwordField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </children>
+    <Label fx:id="noteLabel" text="Entrez un mot de passe pour un nouveau compte ou laissez vide pour conserver l'existant." wrapText="true" styleClass="muted-label"/>
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Pane HBox.hgrow="ALWAYS"/>
+        <Button text="Annuler" onAction="#cancel" styleClass="secondary-button"/>
+        <Button text="Enregistrer" onAction="#save" styleClass="primary-button"/>
+    </HBox>
+</VBox>

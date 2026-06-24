@@ -16,6 +16,10 @@
         <Button text="Charger" onAction="#refresh" styleClass="secondary-button"/>
         <Button fx:id="btnNouvelleSeance" text="+ Nouvelle Séance" onAction="#ouvrirFormulaireSeance" styleClass="primary-button"/>
     </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="✎ Modifier" onAction="#modifierSeance" styleClass="secondary-button"/>
+        <Button text="✕ Annuler" onAction="#annulerSeance" styleClass="danger-outline-button"/>
+    </HBox>
     <TableView fx:id="planningTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="dateColumn" text="Date" prefWidth="180"/>

@@ -23,13 +23,17 @@
     <left>
         <VBox spacing="10" styleClass="sidebar">
             <padding><Insets top="18" right="14" bottom="18" left="14"/></padding>
-            <Button text="Dashboard" onAction="#showDashboard" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="dashboardButton" text="Dashboard" onAction="#showDashboard" maxWidth="Infinity" styleClass="nav-button"/>
             <Button fx:id="professeursButton" text="Professeurs" onAction="#showProfesseurs" maxWidth="Infinity" styleClass="nav-button"/>
             <Button fx:id="coursButton" text="Cours" onAction="#showCours" maxWidth="Infinity" styleClass="nav-button"/>
             <Button fx:id="sallesButton" text="Salles" onAction="#showSalles" maxWidth="Infinity" styleClass="nav-button"/>
             <Button text="Planning" onAction="#showPlanning" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="absenceRetardsButton" text="Absences/Retards" onAction="#showAbsenceRetards" maxWidth="Infinity" styleClass="nav-button"/>
             <Button fx:id="pointageButton" text="Pointage" onAction="#showPointage" maxWidth="Infinity" styleClass="nav-button"/>
             <Button fx:id="rapportsButton" text="Rapports" onAction="#showRapports" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="profilButton" text="Mon profil" onAction="#showProfil" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="utilisateursButton" text="Utilisateurs" onAction="#showUtilisateurs" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="auditButton" text="Audit connexions" onAction="#showAuditConnexions" maxWidth="Infinity" styleClass="nav-button"/>
         </VBox>
     </left>
     <center>

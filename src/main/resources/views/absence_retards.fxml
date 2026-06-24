@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sn.epf.pointage.ui.controller.AbsenceRetardsController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <Label text="Suivi des Absences et Retards" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+    <!-- Filtres -->
+    <VBox spacing="10" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 15;">
+        <Label text="Filtres" style="-fx-font-weight: bold; -fx-font-size: 12;"/>
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <VBox spacing="5">
+                <Label text="Date début:" style="-fx-font-size: 11;"/>
+                <DatePicker fx:id="dateDebutPicker" style="-fx-font-size: 11;"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Date fin:" style="-fx-font-size: 11;"/>
+                <DatePicker fx:id="dateFinPicker" style="-fx-font-size: 11;"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Professeur:" style="-fx-font-size: 11;"/>
+                <ComboBox fx:id="professeurFilterBox" prefWidth="250" style="-fx-font-size: 11;"/>
+            </VBox>
+            <VBox spacing="5" style="-fx-alignment: bottom-right;">
+                <Button text="Chercher" onAction="#refresh" style="-fx-padding: 6 16; -fx-font-size: 11;"/>
+            </VBox>
+        </HBox>
+    </VBox>
+
+    <!-- Statistiques -->
+    <HBox style="-fx-border-color: #e0f0ff; -fx-border-radius: 5; -fx-padding: 12; -fx-background-color: #f5f9ff;">
+        <Label fx:id="statistiquesLabel" text="Statistiques..." style="-fx-font-size: 12; -fx-text-fill: #0066cc;"/>
+    </HBox>
+
+    <!-- Tableau -->
+    <TableView fx:id="absenceTable" style="-fx-font-size: 11;" prefHeight="400">
+        <columns>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="100"/>
+            <TableColumn fx:id="professeurColumn" text="Professeur" prefWidth="150"/>
+            <TableColumn fx:id="heureColumn" text="Heure" prefWidth="120"/>
+            <TableColumn fx:id="typeColumn" text="Type" prefWidth="80"/>
+            <TableColumn fx:id="statutColumn" text="Statut" prefWidth="100"/>
+            <TableColumn fx:id="observationsColumn" text="Observations" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" style="-fx-alignment: center-right;">
+        <Label fx:id="countLabel" text=""/>
+    </HBox>
+
+</VBox>

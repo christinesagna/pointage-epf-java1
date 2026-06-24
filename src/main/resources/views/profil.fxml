@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="sn.epf.pointage.ui.controller.ProfilController"
+        spacing="20" style="-fx-padding: 20;">
+
+      <VBox spacing="10" alignment="TOP_CENTER">
+            <ImageView fx:id="photoView" fitWidth="140" fitHeight="160" preserveRatio="true" />
+            <Label fx:id="nomLabel" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+            <Label fx:id="matriculeLabel" style="-fx-text-fill: #666;"/>
+      </VBox>
+
+      <VBox fx:id="profilContainer" spacing="20" HBox.hgrow="ALWAYS">
+            <!-- contenu injecté par ProfilController -->
+      </VBox>
+
+</HBox>

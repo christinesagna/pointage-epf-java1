@@ -171,6 +171,103 @@ public class PlanningController {
         }
     }
 
+    @FXML
+    public void modifierSeance() {
+        SeancePlanifiee selected = planningTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("Erreur", "Veuillez sélectionner une séance.");
+            return;
+        }
+
+        if (selected.getStatut().name().equals("REALISEE") || selected.getStatut().name().equals("ANNULEE")) {
+            showAlert("Erreur", "Impossible de modifier une séance réalisée ou annulée.");
+            return;
+        }
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Modifier la séance");
+        dialog.setHeaderText("Modifier la date et la durée");
+
+        ButtonType confirmerBtn = new ButtonType("Confirmer", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(confirmerBtn, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20));
+
+        DatePicker datePicker = new DatePicker(selected.getDateHeure().toLocalDate());
+        TextField heureField = new TextField(String.format("%02d:%02d", selected.getDateHeure().getHour(), selected.getDateHeure().getMinute()));
+        TextField dureeField = new TextField(String.valueOf(selected.getDureeMinutes()));
+
+        grid.add(new Label("Date:"), 0, 0);
+        grid.add(datePicker, 1, 0);
+        grid.add(new Label("Heure (HH:mm):"), 0, 1);
+        grid.add(heureField, 1, 1);
+        grid.add(new Label("Durée (min):"), 0, 2);
+        grid.add(dureeField, 1, 2);
+
+        dialog.getDialogPane().setContent(grid);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == confirmerBtn) {
+            try {
+                String[] heureParts = heureField.getText().split(":");
+                LocalDateTime nouvelleDate = datePicker.getValue().atTime(
+                        Integer.parseInt(heureParts[0]),
+                        Integer.parseInt(heureParts[1])
+                );
+                int nouvelleDuree = Integer.parseInt(dureeField.getText());
+
+                planningService.modifierSeance(selected, nouvelleDate, nouvelleDuree);
+                showAlert("Succès", "Séance modifiée avec succès !");
+                refresh();
+            } catch (Exception e) {
+                showAlert("Erreur", "Erreur lors de la modification : " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void annulerSeance() {
+        SeancePlanifiee selected = planningTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("Erreur", "Veuillez sélectionner une séance.");
+            return;
+        }
+
+        if (selected.getStatut().name().equals("REALISEE")) {
+            showAlert("Erreur", "Impossible d'annuler une séance déjà réalisée.");
+            return;
+        }
+
+        if (selected.getStatut().name().equals("ANNULEE")) {
+            showAlert("Information", "Cette séance est déjà annulée.");
+            return;
+        }
+
+        if (!confirmer("Confirmation", "Êtes-vous sûr d'annuler cette séance ?")) {
+            return;
+        }
+
+        try {
+            planningService.annulerSeance(selected);
+            showAlert("Succès", "Séance annulée avec succès !");
+            refresh();
+        } catch (Exception e) {
+            showAlert("Erreur", "Erreur lors de l'annulation : " + e.getMessage());
+        }
+    }
+
+    private boolean confirmer(String titre, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
+
     private void showAlert(String titre, String message) {
         Alert alert = new Alert(titre.equals("Erreur") ? Alert.AlertType.ERROR : Alert.AlertType.INFORMATION);
         alert.setTitle(titre);

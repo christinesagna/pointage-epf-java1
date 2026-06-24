@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.epf.pointage.ui.controller.UtilisateursController" spacing="16" styleClass="page-root">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Gestion des utilisateurs" styleClass="page-title"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Recherche par login, rôle ou matricule" HBox.hgrow="ALWAYS" maxWidth="320"/>
+        <Button text="Filtrer" onAction="#search" styleClass="secondary-button"/>
+        <Button text="Rafraîchir" onAction="#refresh" styleClass="secondary-button"/>
+        <Button text="Nouveau compte" onAction="#openCreateForm" styleClass="primary-button"/>
+        <Button text="Modifier" onAction="#openEditForm" styleClass="secondary-button"/>
+        <Button text="Supprimer" onAction="#deleteSelected" styleClass="danger-outline-button"/>
+    </HBox>
+    <TableView fx:id="utilisateurTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="loginColumn" text="Login" prefWidth="220"/>
+            <TableColumn fx:id="roleColumn" text="Rôle" prefWidth="140"/>
+            <TableColumn fx:id="professeurColumn" text="Professeur lié" prefWidth="180"/>
+        </columns>
+    </TableView>
+</VBox>

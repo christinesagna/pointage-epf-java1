@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import sn.epf.pointage.ui.controller.MainLayoutController;
 
 import java.io.IOException;
+import java.io.StringWriter;
 
 public final class Router {
 
@@ -41,7 +42,7 @@ public final class Router {
             applyCss(scene);
             primaryStage.setScene(scene);
             primaryStage.show();
-            mainLayoutController.showDashboard();
+            mainLayoutController.showDefaultView();
         } catch (IOException e) {
             throw new RuntimeException("Impossible de charger main-layout.fxml", e);
         }
@@ -51,7 +52,15 @@ public final class Router {
         if (mainLayoutController == null) {
             throw new IllegalStateException("MainLayoutController non initialisé");
         }
-        mainLayoutController.setContent(load(fxml));
+        try {
+            mainLayoutController.setContent(load(fxml));
+        } catch (RuntimeException e) {
+            System.err.println("Erreur lors du chargement de la vue : " + fxml);
+            e.printStackTrace();
+            javafx.scene.control.Label err = new javafx.scene.control.Label("Impossible de charger la vue : " + fxml);
+            err.setStyle("-fx-text-fill: #c0392b; -fx-font-weight: bold; -fx-padding: 20;");
+            mainLayoutController.setContent(err);
+        }
     }
 
     public static Stage openModal(String fxml, String title) {
@@ -77,9 +86,38 @@ public final class Router {
 
     private static Parent load(String fxml) {
         try {
-            return FXMLLoader.load(Router.class.getResource(fxml));
-        } catch (IOException e) {
-            throw new RuntimeException("Impossible de charger la vue : " + fxml, e);
+            java.net.URL url = Router.class.getResource(fxml);
+            if (url == null) {
+                // try with/without leading slash
+                String alt = fxml.startsWith("/") ? fxml.substring(1) : "/" + fxml;
+                url = Router.class.getResource(alt);
+            }
+            if (url == null) {
+                // try adding .fxml
+                String withExt = fxml.endsWith(".fxml") ? fxml : (fxml + ".fxml");
+                url = Router.class.getResource(withExt);
+            }
+            if (url == null) {
+                throw new IOException("Ressource introuvable: " + fxml);
+            }
+            return FXMLLoader.load(url);
+        } catch (Exception e) {
+            // Build an informative Node with the stacktrace so the user sees the error in the UI
+            javafx.scene.layout.VBox box = new javafx.scene.layout.VBox();
+            javafx.scene.control.Label title = new javafx.scene.control.Label("Impossible de charger la vue : " + fxml);
+            title.setStyle("-fx-text-fill: #c0392b; -fx-font-weight: bold; -fx-padding: 8;");
+            javafx.scene.control.TextArea ta = new javafx.scene.control.TextArea();
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new java.io.PrintWriter(sw));
+            ta.setText(sw.toString());
+            ta.setEditable(false);
+            ta.setWrapText(false);
+            javafx.scene.control.ScrollPane sp = new javafx.scene.control.ScrollPane(ta);
+            sp.setFitToWidth(true);
+            sp.setFitToHeight(true);
+            box.getChildren().addAll(title, sp);
+            box.setStyle("-fx-padding: 12;");
+            return box;
         }
     }
 

@@ -1,10 +1,12 @@
 package sn.epf.pointage.service;
 
+import sn.epf.pointage.config.SecurityUtils;
 import sn.epf.pointage.dao.PointageDAO;
 import sn.epf.pointage.dao.SeancePlanifieeDAO;
 import sn.epf.pointage.model.Pointage;
 import sn.epf.pointage.model.Professeur;
 import sn.epf.pointage.model.SeancePlanifiee;
+import sn.epf.pointage.model.enums.Role;
 import sn.epf.pointage.model.enums.StatutPointage;
 import sn.epf.pointage.model.enums.StatutSeance;
 import sn.epf.pointage.model.enums.TypePointage;
@@ -17,6 +19,18 @@ public class PointageService {
     private final SeancePlanifieeDAO seanceDAO = new SeancePlanifieeDAO();
 
     public Pointage pointerDebut(Professeur professeur, SeancePlanifiee seance, LocalDateTime heure) {
+        // Vérification de sécurité : seul un PROFESSEUR peut pointer
+        SecurityUtils.checkIsProfesseur();
+        // Vérification d'identité : le professeur doit correspondre à l'utilisateur connecté
+        try {
+            sn.epf.pointage.model.Utilisateur current = sn.epf.pointage.config.SessionContext.getInstance().currentUser();
+            if (current != null && current.getProfesseurLie() != null && !current.getProfesseurLie().getId().equals(professeur.getId())) {
+                throw new SecurityException("Accès refusé: vous ne pouvez pointer que pour votre propre compte.");
+            }
+        } catch (SecurityException e) {
+            throw e;
+        } catch (Exception ignored) {}
+        
         Pointage p = new Pointage();
         p.setProfesseur(professeur);
         p.setSeance(seance);
@@ -50,6 +64,9 @@ public class PointageService {
     }
 
     public Pointage pointerFin(Professeur professeur, SeancePlanifiee seance, LocalDateTime heure) {
+        // Vérification de sécurité : seul un PROFESSEUR peut pointer
+        SecurityUtils.checkIsProfesseur();
+        
         Pointage p = new Pointage();
         p.setProfesseur(professeur);
         p.setSeance(seance);

@@ -15,11 +15,16 @@ public class MainLayoutController {
     @FXML private Label currentUserLabel;
     @FXML private Label roleLabel;
     @FXML private StackPane contentPane;
+    @FXML private Button dashboardButton;
     @FXML private Button professeursButton;
     @FXML private Button coursButton;
     @FXML private Button sallesButton;
+    @FXML private Button absenceRetardsButton;
     @FXML private Button pointageButton;
     @FXML private Button rapportsButton;
+    @FXML private Button profilButton;
+    @FXML private Button utilisateursButton;
+    @FXML private Button auditButton;
 
     private final AuthService authService = new AuthService();
 
@@ -30,20 +35,50 @@ public class MainLayoutController {
             currentUserLabel.setText(user.getLogin());
             roleLabel.setText(user.getRole().name());
             if (user.getRole() == Role.PROFESSEUR) {
+                dashboardButton.setVisible(false);
+                dashboardButton.setManaged(false);
                 professeursButton.setVisible(false);
                 professeursButton.setManaged(false);
                 coursButton.setVisible(false);
                 coursButton.setManaged(false);
                 sallesButton.setVisible(false);
                 sallesButton.setManaged(false);
+                absenceRetardsButton.setVisible(false);
+                absenceRetardsButton.setManaged(false);
+                utilisateursButton.setVisible(false);
+                utilisateursButton.setManaged(false);
+                auditButton.setVisible(false);
+                auditButton.setManaged(false);
+                profilButton.setVisible(true);
+                profilButton.setManaged(true);
             } else if (user.getRole() == Role.SCOLARITE) {
+                absenceRetardsButton.setVisible(true);
+                absenceRetardsButton.setManaged(true);
                 pointageButton.setVisible(false);
                 pointageButton.setManaged(false);
-            }
-            if (user.getRole() == Role.ADMIN) {
+                utilisateursButton.setVisible(false);
+                utilisateursButton.setManaged(false);
+                auditButton.setVisible(false);
+                auditButton.setManaged(false);
+                profilButton.setVisible(false);
+                profilButton.setManaged(false);
+            } else if (user.getRole() == Role.ADMIN) {
                 pointageButton.setVisible(false);
                 pointageButton.setManaged(false);
+                absenceRetardsButton.setVisible(false);
+                absenceRetardsButton.setManaged(false);
+                profilButton.setVisible(false);
+                profilButton.setManaged(false);
             }
+        }
+    }
+
+    public void showDefaultView() {
+        Utilisateur user = authService.currentUser();
+        if (user != null && user.getRole() == Role.PROFESSEUR) {
+            showPlanning();
+        } else {
+            showDashboard();
         }
     }
 
@@ -53,6 +88,10 @@ public class MainLayoutController {
 
     @FXML
     public void showDashboard() {
+        Utilisateur user = authService.currentUser();
+        if (user != null && user.getRole() == Role.PROFESSEUR) {
+            return;
+        }
         Router.setCenter("/views/dashboard.fxml");
     }
 
@@ -84,6 +123,26 @@ public class MainLayoutController {
     @FXML
     public void showRapports() {
         Router.setCenter("/views/rapports.fxml");
+    }
+
+    @FXML
+    public void showUtilisateurs() {
+        Router.setCenter("/views/utilisateurs.fxml");
+    }
+
+    @FXML
+    public void showAuditConnexions() {
+        Router.setCenter("/views/audit_connexions.fxml");
+    }
+
+    @FXML
+    public void showAbsenceRetards() {
+        Router.setCenter("/views/absence_retards.fxml");
+    }
+
+    @FXML
+    public void showProfil() {
+        Router.setCenter("/views/profil.fxml");
     }
 
     @FXML

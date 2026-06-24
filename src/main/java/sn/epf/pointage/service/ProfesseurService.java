@@ -16,6 +16,9 @@ public class ProfesseurService {
     private final UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
     public Professeur enrôlerProfesseur(Professeur professeur, String login, String motDePasse) {
+        // Vérification de sécurité : seul un ADMIN ou SCOLARITE peut enrôler un professeur
+        SecurityUtils.checkAnyRole(Role.ADMIN, Role.SCOLARITE);
+        
         professeur.setMatricule(MatriculeGenerator.generate(
                 professeur.getNom(), professeur.getPrenom()));
 
@@ -40,11 +43,17 @@ public class ProfesseurService {
     }
 
     public void desactiverProfesseur(Professeur professeur) {
+        // Vérification de sécurité : seul un ADMIN ou SCOLARITE peut désactiver
+        SecurityUtils.checkAnyRole(Role.ADMIN, Role.SCOLARITE);
+        
         professeur.setActif(false);
         professeurDAO.update(professeur);
     }
 
     public void activerProfesseur(Professeur professeur) {
+        // Vérification de sécurité : seul un ADMIN ou SCOLARITE peut activer
+        SecurityUtils.checkAnyRole(Role.ADMIN, Role.SCOLARITE);
+        
         professeur.setActif(true);
         professeurDAO.update(professeur);
     }
