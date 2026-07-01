@@ -17,8 +17,8 @@
         <Button fx:id="btnNouvelleSeance" text="+ Nouvelle Séance" onAction="#ouvrirFormulaireSeance" styleClass="primary-button"/>
     </HBox>
     <HBox spacing="10" alignment="CENTER_LEFT">
-        <Button text="✎ Modifier" onAction="#modifierSeance" styleClass="secondary-button"/>
-        <Button text="✕ Annuler" onAction="#annulerSeance" styleClass="danger-outline-button"/>
+        <Button fx:id="btnModifierSeance" text="✎ Modifier" onAction="#modifierSeance" styleClass="secondary-button"/>
+        <Button fx:id="btnAnnulerSeance" text="✕ Annuler" onAction="#annulerSeance" styleClass="danger-outline-button"/>
     </HBox>
     <TableView fx:id="planningTable" VBox.vgrow="ALWAYS">
         <columns>

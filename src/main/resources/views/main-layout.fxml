@@ -7,33 +7,36 @@
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" styleClass="topbar">
             <padding><Insets top="16" right="20" bottom="16" left="20"/></padding>
-            <VBox spacing="2">
-                <Label text="Système de Gestion de Pointage" styleClass="topbar-title"/>
-                <Label text="Professeurs • JavaFX • Hibernate • MySQL" styleClass="topbar-subtitle"/>
+            <VBox spacing="2" styleClass="title-card">
+                <Label text="SmartPoint EPF" styleClass="topbar-title"/>
+                <Label text="Suivi des présences • Planification • Rapports" styleClass="topbar-subtitle"/>
             </VBox>
             <Pane HBox.hgrow="ALWAYS"/>
-            <VBox alignment="CENTER_RIGHT" spacing="2">
-                <Label text="Utilisateur connecté" styleClass="muted-label"/>
-                <Label fx:id="currentUserLabel" styleClass="user-label"/>
-                <Label fx:id="roleLabel" styleClass="badge-label"/>
+            <VBox alignment="CENTER_RIGHT" spacing="8" styleClass="user-panel" style="-fx-min-width: 350; -fx-pref-width: 400; -fx-padding: 18 20;">
+                <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-min-height: 32;">
+                    <Label text="👤 Utilisateur connecté :" styleClass="user-status-label" style="-fx-min-height: 26;"/>
+                    <Label fx:id="currentUserLabel" text="[Utilisateur]" styleClass="user-label" style="-fx-min-width: 150; -fx-min-height: 30;"/>
+                </HBox>
+                <Label fx:id="roleLabel" text="[RÔLE]" styleClass="badge-label" style="-fx-min-height: 28;"/>
             </VBox>
             <Button text="Déconnexion" onAction="#logout" styleClass="danger-outline-button"/>
         </HBox>
     </top>
     <left>
-        <VBox spacing="10" styleClass="sidebar">
+        <VBox spacing="6" styleClass="sidebar">
             <padding><Insets top="18" right="14" bottom="18" left="14"/></padding>
-            <Button fx:id="dashboardButton" text="Dashboard" onAction="#showDashboard" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="professeursButton" text="Professeurs" onAction="#showProfesseurs" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="coursButton" text="Cours" onAction="#showCours" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="sallesButton" text="Salles" onAction="#showSalles" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button text="Planning" onAction="#showPlanning" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="absenceRetardsButton" text="Absences/Retards" onAction="#showAbsenceRetards" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="pointageButton" text="Pointage" onAction="#showPointage" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="rapportsButton" text="Rapports" onAction="#showRapports" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="profilButton" text="Mon profil" onAction="#showProfil" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="utilisateursButton" text="Utilisateurs" onAction="#showUtilisateurs" maxWidth="Infinity" styleClass="nav-button"/>
-            <Button fx:id="auditButton" text="Audit connexions" onAction="#showAuditConnexions" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="dashboardButton" text="🏠  Tableau de bord" onAction="#showDashboard" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="professeursButton" text="👤  Professeurs" onAction="#showProfesseurs" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="coursButton" text="📚  Cours" onAction="#showCours" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="sallesButton" text="🏫  Salles" onAction="#showSalles" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button text="🗓  Planning" onAction="#showPlanning" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="absenceRetardsButton" text="⏱  Absences/Retards" onAction="#showAbsenceRetards" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="pointageButton" text="✅  Pointage" onAction="#showPointage" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="rapportsButton" text="📊  Rapports" onAction="#showRapports" maxWidth="Infinity" styleClass="nav-button"/>
+            <Separator/>
+            <Button fx:id="profilButton" text="🙍  Mon profil" onAction="#showProfil" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="utilisateursButton" text="⚙  Utilisateurs" onAction="#showUtilisateurs" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="auditButton" text="🛡  Audit connexions" onAction="#showAuditConnexions" maxWidth="Infinity" styleClass="nav-button"/>
         </VBox>
     </left>
     <center>

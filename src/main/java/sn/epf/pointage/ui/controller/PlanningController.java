@@ -28,6 +28,8 @@ public class PlanningController {
     @FXML private TableColumn<SeancePlanifiee, Integer> dureeColumn;
     @FXML private TableColumn<SeancePlanifiee, String> statutColumn;
     @FXML private Button btnNouvelleSeance;
+    @FXML private Button btnModifierSeance;
+    @FXML private Button btnAnnulerSeance;
 
     private final PlanningService planningService = new PlanningService();
     private final ProfesseurService professeurService = new ProfesseurService();
@@ -56,6 +58,8 @@ public class PlanningController {
             professeurBox.getSelectionModel().selectFirst();
             professeurBox.setDisable(true);
             btnNouvelleSeance.setVisible(false);
+            btnModifierSeance.setVisible(false);
+            btnAnnulerSeance.setVisible(false);
         } else {
             List<Professeur> professeurs = professeurService.listerProfesseursActifs();
             professeurBox.getItems().setAll(professeurs);

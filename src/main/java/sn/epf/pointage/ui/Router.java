@@ -20,7 +20,7 @@ public final class Router {
 
     public static void init(Stage stage) {
         primaryStage = stage;
-        primaryStage.setTitle("EPF Africa - Gestion de pointage");
+        primaryStage.setTitle("SmartPoint EPF - Gestion de pointage");
         primaryStage.setMinWidth(1200);
         primaryStage.setMinHeight(760);
     }

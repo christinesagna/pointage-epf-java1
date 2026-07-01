@@ -1,0 +1,12 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "selector-pseudo-class-no-unknown": null,
+    "selector-pseudo-element-no-unknown": null,
+    "property-no-unknown": [true, { "ignoreProperties": [/^-fx-/, /^-epf-/] }],
+    "at-rule-no-unknown": [true, { "ignoreAtRules": ["supports"] }],
+    "comment-no-empty": null,
+    "no-descending-specificity": null,
+    "function-no-unknown": [true, { "ignoreFunctions": ["dropshadow", "linear-gradient"] }]
+  }
+}
